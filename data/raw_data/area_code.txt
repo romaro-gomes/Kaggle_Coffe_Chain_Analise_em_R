@@ -1,0 +1,427 @@
+Area_code	Location	Overlay_complex	Timezone
+201	New Jersey	201/551	E
+202	Washington D.C.	202/771	E
+203	Connecticut	203/475	E
+204	Manitoba	204/431	C
+205	Alabama	205/659	C
+206	Washington	-	P
+207	Maine	-	E
+208	Idaho	208/986	M/P
+209	California	-	P
+210	Texas	210/726	C
+212	New York	212/646/917/332	E
+213	California	323/213	P
+214	Texas	214/972/469/945	C
+215	Pennsylvania	215/267/445	E
+216	Ohio	-	E
+217	Illinois	217/447	C
+218	Minnesota	-	C
+219	Indiana	-	E/C
+220	Ohio	740/220	E
+223	Pennsylvania	717/223	E
+224	Illinois	847/224	C
+225	Louisiana	-	C
+226	Ontario	519/226/548	E
+228	Mississippi	-	C
+229	Georgia	-	E
+231	Michigan	-	E
+234	Ohio	330/234	E
+236	British Columbia	250/778/236/672 & 604/778/236/672	P
+239	Florida	-	E
+240	Maryland	301/240	E
+242	Bahamas	-	E
+246	Barbados	-	AST
+248	Michigan	248/947	E
+249	Ontario	705/249	E
+250	British Columbia	250/778/236/672	P
+251	Alabama	-	C
+252	North Carolina	-	E
+253	Washington	-	P
+254	Texas	-	C
+256	Alabama	256/938	C
+260	Indiana	-	E
+262	Wisconsin	-	C
+264	Anguilla	-	AST
+267	Pennsylvania	215/267/445	E
+268	Antigua & Barbuda	-	AST
+269	Michigan	-	E
+270	Kentucky	270/364	E/C
+272	Pennsylvania	570/272	E
+276	Virginia	-	E
+279	California	916/279	P
+281	Texas	713/281/832/346	C
+284	British Virgin Islands	-	AST
+289	Ontario	905/289/365/742	E
+301	Maryland	301/240	E
+302	Delaware	-	E
+303	Colorado	303/720	M
+304	West Virginia	304/681	E
+305	Florida	305/786	E
+306	Saskatchewan	306/639/474	CST
+307	Wyoming	-	M
+308	Nebraska	-	C/M
+309	Illinois	-	C
+310	California	310/424	P
+312	Illinois	312/872	C
+313	Michigan	-	E
+314	Missouri	-	C
+315	New York	315/680	E
+316	Kansas	-	C
+317	Indiana	317/463	E
+318	Louisiana	-	C
+319	Iowa	-	C
+320	Minnesota	-	C
+321	Florida	407/321/689	E
+323	California	323/213	P
+325	Texas	-	C
+326	Ohio	937/326	E
+330	Ohio	330/234	E
+331	Illinois	630/331	C
+332	New York	212/646/917/332	E
+334	Alabama	-	C
+336	North Carolina	336/743	E
+337	Louisiana	-	C
+339	Massachusetts	781/339	E
+340	US Virgin Islands	-	AST
+341	California	510/341	P
+343	Ontario	613/343/753	E
+345	Cayman Islands	-	EST
+346	Texas	713/281/832/346	C
+347	New York	718/347/917/929	E
+351	Massachusetts	978/351	E
+352	Florida	-	E
+360	Washington	360/564	P
+361	Texas	-	C
+364	Kentucky	270/364	E/C
+365	Ontario	905/289/365/742	E
+367	Quebec	418/581/367	E
+368	Alberta	403/587/825/368 & 780/587/825/368	M
+380	Ohio	614/380	E
+385	Utah	801/385	M
+386	Florida	-	E
+401	Rhode Island	-	E
+402	Nebraska	402/531	C
+403	Alberta	403/587/825/368	M
+404	Georgia	404/678/470/943	E
+405	Oklahoma	405/572	C
+406	Montana	-	M
+407	Florida	407/321/689	E
+408	California	408/669	P
+409	Texas	-	C
+410	Maryland	410/443/667	E
+412	Pennsylvania	412/878	E
+413	Massachusetts	-	E
+414	Wisconsin	-	C
+415	California	415/628	P
+416	Ontario	416/647/437	E
+417	Missouri	-	C
+418	Quebec	418/581/367	E
+419	Ohio	419/567	E
+423	Tennessee	-	E/C
+424	California	310/424	P
+425	Washington	-	P
+428	New Brunswick	506/428	A
+430	Texas	903/430	C
+431	Manitoba	204/431	C
+432	Texas	-	C
+434	Virginia	-	E
+435	Utah	-	M
+437	Ontario	416/647/437	E
+438	Quebec	514/438	E
+440	Ohio	-	E
+441	Bermuda	-	A
+442	California	760/442	P
+443	Maryland	410/443/667	E
+445	Pennsylvania	215/267/445	E
+447	Illinois	217/447	C
+448	Florida	850/448	E/C
+450	Quebec	450/579	E
+456	Carrier Services	-	-
+458	Oregon	541/458	M/P
+463	Indiana	317/463	E
+464	Illinois	708/464	C
+469	Texas	214/972/469/945	C
+470	Georgia	404/678/470/943 & 770/678/470/943	E
+473	Grenada	-	AST
+474	Saskatchewan	306/639/474	CST
+475	Connecticut	203/475	E
+478	Georgia	-	E
+479	Arkansas	-	C
+480	Arizona	-	MST
+484	Pennsylvania	610/484	E
+500	Personal Communications Services	-	-
+501	Arkansas	-	C
+502	Kentucky	-	E
+503	Oregon	503/971	P
+504	Louisiana	-	C
+505	New Mexico	-	M
+506	New Brunswick	506/428	A
+507	Minnesota	-	C
+508	Massachusetts	508/774	E
+509	Washington	-	P
+510	California	510/341	P
+512	Texas	512/737	C
+513	Ohio	-	E
+514	Quebec	514/438	E
+515	Iowa	-	C
+516	New York	-	E
+517	Michigan	-	E
+518	New York	518/838	E
+519	Ontario	519/226/548	E
+520	Arizona	-	MST
+530	California	-	P
+531	Nebraska	402/531	C
+533	Personal Communications Services	-	-
+534	Wisconsin	715/534	C
+539	Oklahoma	918/539	C
+540	Virginia	-	E
+541	Oregon	541/458	M/P
+544	Personal Communications Services	-	-
+548	Ontario	519/226/548	E
+551	New Jersey	201/551	E
+559	California	-	P
+561	Florida	-	E
+562	California	-	P
+563	Iowa	-	C
+564	Washington	360/564	P
+566	Personal Communications Services	-	-
+567	Ohio	419/567	E
+570	Pennsylvania	570/272	E
+571	Virginia	703/571	E
+572	Oklahoma	405/572	C
+573	Missouri	-	C
+574	Indiana	-	E/C
+575	New Mexico	-	M
+577	Personal Communications Services	-	-
+579	Quebec	450/579	E
+580	Oklahoma	-	C
+581	Quebec	418/581/367	E
+582	Pennsylvania	814/582	E
+585	New York	-	E
+586	Michigan	-	E
+587	Alberta	403/587/825/368 & 780/587/825/368	M
+600	Canada only, Non Geographic	-	-
+601	Mississippi	601/769	C
+602	Arizona	-	MST
+603	New Hampshire	-	E
+604	British Columbia	604/778/236/672	P
+605	South Dakota	-	C/M
+606	Kentucky	-	E/C
+607	New York	-	E
+608	Wisconsin	-	C
+609	New Jersey	609/640	E
+610	Pennsylvania	610/484	E
+612	Minnesota	-	C
+613	Ontario	613/343/753	E
+614	Ohio	614/380	E
+615	Tennessee	615/629	C
+616	Michigan	-	E
+617	Massachusetts	617/857	E
+618	Illinois	-	C
+619	California	619/858	P
+620	Kansas	-	C/M
+623	Arizona	-	MST
+626	California	-	P
+628	California	415/628	P
+629	Tennessee	615/629	C
+630	Illinois	630/331	C
+631	New York	631/934	E
+636	Missouri	-	C
+639	Saskatchewan	306/639/474	CST
+640	New Jersey	609/640	E
+641	Iowa	-	C
+646	New York	212/646/917/332	E
+647	Ontario	416/647/437	E
+649	Turks & Caicos	-	E
+650	California	-	P
+651	Minnesota	-	C
+656	Florida	813/656	E
+657	California	714/657	P
+658	Jamaica	876/658	EST
+659	Alabama	205/659	C
+660	Missouri	-	C
+661	California	-	P
+662	Mississippi	-	C
+664	Montserrat	-	AST
+667	Maryland	410/443/667	E
+669	California	408/669	P
+670	Northern Mariana Isl.	-	ChST
+671	Guam	-	ChST
+672	British Columbia	250/778/236/672 & 604/778/236/672	P
+678	Georgia	404/678/470/943 & 770/678/470/943	E
+680	New York	315/680	E
+681	West Virginia	304/681	E
+682	Texas	817/682	C
+684	American Samoa	-	SST
+689	Florida	407/321/689	E
+700	Carrier Services	-	-
+701	North Dakota	-	C/M
+702	Nevada	702/725	P
+703	Virginia	703/571	E
+704	North Carolina	704/980	E
+705	Ontario	705/249	E
+706	Georgia	706/762	E
+707	California	-	P
+708	Illinois	708/464	C
+709	Newfoundland	-	N
+710	US Government	-	-
+712	Iowa	-	C
+713	Texas	713/281/832/346	C
+714	California	714/657	P
+715	Wisconsin	715/534	C
+716	New York	-	E
+717	Pennsylvania	717/223	E
+718	New York	718/347/917/929	E
+719	Colorado	-	M
+720	Colorado	303/720	M
+721	Sint Maarten	-	AST
+724	Pennsylvania	724/878	E
+725	Nevada	702/725	P
+726	Texas	210/726	C
+727	Florida	-	E
+731	Tennessee	-	C
+732	New Jersey	732/848	E
+734	Michigan	-	E
+737	Texas	512/737	C
+742	Ontario	905/289/365/742	E
+740	Ohio	740/220	E
+743	North Carolina	336/743	E
+747	California	818/747	P
+753	Ontario	613/343/753	E
+754	Florida	954/754	E
+757	Virginia	757/948	E
+758	St. Lucia	-	AST
+760	California	760/442	P
+762	Georgia	706/762	E
+763	Minnesota	-	C
+765	Indiana	-	E
+767	Dominica	-	AST
+769	Mississippi	601/769	C
+770	Georgia	770/678/470/943	E
+771	Washington D.C.	202/771	E
+772	Florida	-	E
+773	Illinois	773/872	C
+774	Massachusetts	508/774	E
+775	Nevada	-	P
+778	British Columbia	604/778/236/672 & 250/778/236/672	P
+779	Illinois	815/779	C
+780	Alberta	780/587/825/368	M
+781	Massachusetts	781/339	E
+782	Nova Scotia/PEI	902/782	A
+784	St. Vincent and the Grenadines	-	AST
+785	Kansas	-	C/M
+786	Florida	305/786	E
+787	Puerto Rico	787/939	AST
+800	Toll free	-	-
+801	Utah	801/385	M
+802	Vermont	-	E
+803	South Carolina	803/839	E
+804	Virginia	-	E
+805	California	805/820	P
+806	Texas	-	C
+807	Ontario	-	E/C
+808	Hawaii	-	HST
+809	Dominican Republic	809/829/849	AST
+810	Michigan	-	E
+812	Indiana	812/930	E/C
+813	Florida	813/656	E
+814	Pennsylvania	814/582	E
+815	Illinois	815/779	C
+816	Missouri	-	C
+817	Texas	817/682	C
+818	California	818/747	P
+819	Quebec	819/873	E
+820	California	805/820	P
+825	Alberta	403/587/825/368 & 780/587/825/368	M
+828	North Carolina	-	E
+829	Dominican Republic	809/829/849	AST
+830	Texas	-	C
+831	California	-	P
+832	Texas	713/281/832/346	C
+833	Toll free	-	-
+838	New York	518/838	E
+839	South Carolina	803/839	E
+840	California	909/840	P
+843	South Carolina	843/854	E
+844	Toll free	-	-
+845	New York	-	E
+847	Illinois	847/224	C
+848	New Jersey	732/848	E
+849	Dominican Republic	809/829/849	AST
+850	Florida	850/448	E/C
+854	South Carolina	843/854	E
+855	Toll free	-	-
+856	New Jersey	-	E
+857	Massachusetts	617/857	E
+858	California	619/858	P
+859	Kentucky	-	E
+860	Connecticut	860/959	E
+862	New Jersey	973/862	E
+863	Florida	-	E
+864	South Carolina	-	E
+865	Tennessee	-	E
+866	Toll free	-	-
+867	NW Territories, Nunavut, Yukon	-	C/M/P
+868	Trinidad & Tobago	-	AST
+869	St. Kitts & Nevis	-	AST
+870	Arkansas	-	C
+872	Illinois	312/872 & 773/872	C
+873	Quebec	819/873	E
+876	Jamaica	876/658	EST
+877	Toll free	-	-
+878	Pennsylvania	412/878 & 724/878	E
+888	Toll free	-	-
+900	Pay per call	-	-
+901	Tennessee	-	C
+902	Nova Scotia/PEI	902/782	A
+903	Texas	903/430	C
+904	Florida	-	E
+905	Ontario	905/289/365/742	E
+906	Michigan	-	E/C
+907	Alaska	-	AK
+908	New Jersey	-	E
+909	California	909/840	P
+910	North Carolina	-	E
+911	Emergency	 	 
+912	Georgia	-	E
+913	Kansas	-	C
+914	New York	-	E
+915	Texas	-	M/C
+916	California	916/279	P
+917	New York	212/646/917/332 & 718/347/917/929	E
+918	Oklahoma	918/539	C
+919	North Carolina	919/984	E
+920	Wisconsin	-	C
+925	California	-	P
+928	Arizona	-	MST
+929	New York	718/347/917/929	E
+930	Indiana	812/930	E/C
+931	Tennessee	-	E/C
+934	New York	631/934	E
+936	Texas	-	C
+937	Ohio	937/326	E
+938	Alabama	256/938	C
+939	Puerto Rico	787/939	AST
+940	Texas	-	C
+941	Florida	-	E
+943	Georgia	404/678/470/943 & 770/678/470/943	E
+945	Texas	214/972/469/945	C
+947	Michigan	248/947	E
+948	Virginia	757/948	E
+949	California	-	P
+951	California	-	P
+952	Minnesota	-	C
+954	Florida	954/754	E
+956	Texas	-	C
+959	Connecticut	860/959	E
+970	Colorado	-	M
+971	Oregon	503/971	P
+972	Texas	214/972/469/945	C
+973	New Jersey	973/862	E
+978	Massachusetts	978/351	E
+979	Texas	-	C
+980	North Carolina	704/980	E
+984	North Carolina	919/984	E
+985	Louisiana	-	C
+986	Idaho	208/986	M/P
+989	Michigan	-

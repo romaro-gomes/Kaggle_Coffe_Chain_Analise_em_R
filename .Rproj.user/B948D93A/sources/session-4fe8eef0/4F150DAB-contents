@@ -1,0 +1,431 @@
+---
+title: "Coffee Chain - Investindo em Produtos de Café"
+author: "Romario José Gomes"
+date: '2022-06-17'
+output:
+ html_document:
+  code_folding: hide
+  toc: true
+  toc_float:
+   collapsed: true
+   smooth_scroll: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+   warning=FALSE, message=FALSE,  tidy=TRUE,	tidy.opts=list(arrow=TRUE,	indent=2),fig.width = 10, fig.align = 'center', fig.asp=0.618, out.width = '100%')
+```
+
+## Introdução.
+
+Talvez umas das iguarias mais apreciadas pelos [universitários](https://periodicos.iftm.edu.br/index.php/inova/article/view/1002), junto com o  miojo, seja o café. Apreciado por todo mundo, o café é um produto com variações de [sabor](http://divinapanela.com/blog/ipos-de-cafe-conheca-17-sabores-diferentes/) e [preparo](https://www.mokaclube.com.br/blog/metodos-de-preparo-de-cafe/). Esta diversidade de opções gera bebidas maravilhosas a coisas surreais, como o café com [abóbora](https://casavogue.globo.com/LazerCultura/Comida-bebida/noticia/2019/08/pumpkin-spice-starbucks-traz-cafe-com-calda-de-abobora-ao-brasil.html), horrível.
+
+O Dataset de hoje foi retirado do [Kaggle](https://www.kaggle.com/datasets/qusaybtoush1990/coffee-chain), fornecido por [Qusay AL-Btoush](https://www.kaggle.com/qusaybtoush1990). Não está claro se os dados são verdadeiros, mas são dados orçamentarios relacionados à venda de café e produtos relacionados.
+
+Vamos ver os dados
+
+# Bibliotecass
+```{r pacotes}
+library(tidyverse)
+library(here)
+library(RVAideMemoire)
+library(car)
+library(rstatix)
+library(DT)
+library(gt)
+library(RColorBrewer)
+library(knitr)
+library(kableExtra)
+```
+# Importanto 
+
+```{r}
+coffee_raw=read_csv(here('data','raw_data',"Coffee Chain.csv"))
+coffee=coffee_raw
+knitr::kable(coffee) %>%
+   kable_paper() %>%
+  scroll_box(width = "1000px", height = "300px")
+```
+
+# Manipulando
+
+Não há muito o que fazer com os dados. A única coisa significativa com incluir as Timezones de cada estado no tabela, apartir do seu código de área. Fiz isso pois achei que seria interessante visualizar as difenrenças devendas e consumos de café pelos EUA.
+
+Mas aparentemente o país pode ser dividido de muitas formas, a timezone foi a mais simples e rápida que achei no google. compai com os dado de zipcode.
+
+Além disso, eu coloquei a diferença entre os valores planejados no orçamento (Budge) com os reais. Queria ver se as coisas saíram como o esperado, ou não. Foi bom para  eu entender um pouco mais sobre pequenos negócios. E caso tenha interesse, as explicações sobre algumas variáveis estão abaixo.
+
+**Budget Profit**: https://smallbusiness.chron.com/calculate-budgeted-profit-36513.html
+
+**Budget Margin**: https://www.ramseysolutions.com/budgeting/7-ways-to-create-financial-margin
+
+**Budget COGS**: https://www.thebalancesmb.com/prepare-a-cost-of-goods-sold-budget-an-example-393035
+
+**Budget COGS**: https://squareup.com/us/en/townsquare/what-is-cost-of-goods-sold
+
+**Budget_Sales**: https://www.thebalancesmb.com/the-sales-budget-an-example-393024
+
+**Dataset**: https://www.kaggle.com/datasets/qusaybtoush1990/coffee-chain 
+
+**Total expensives**= https://www.profitwell.com/recur/all/total-expenses
+```{r}
+
+# Transformando a coluna Ddate em uma data
+coffee$Ddate = as.Date(coffee$Ddate)
+
+#Trocado o nome das colunas
+colnames(coffee)=str_replace_all(colnames(coffee)," ",'_')
+
+# Dados das areas dos EUA
+area_code=read_delim(here('data','raw_data',"area_code.txt"),delim = '\t')
+area_code= area_code %>% select(!'Overlay_complex') %>% rename(Area_Code =Area_code)
+
+coffee= left_join(coffee,area_code)
+
+# Diferença do Planejado com o Real
+coffee$Cogs_diff=coffee$Budget_Cogs-coffee$Cogs
+coffee$Margin_diff=coffee$Budget_Margin-coffee$Margin
+coffee$Profit_diff=coffee$Budget_Profit-coffee$Profit
+coffee$Sales_diff=coffee$Budget_Sales-coffee$Coffee_Sales
+
+kable(coffee) %>%
+   kable_paper() %>%
+  scroll_box(width = "1000px", height = "300px")
+```
+
+# Visualizando os dados
+
+No banco de dados existem mercados de tamanhos grandes e pequenos, como será que eles são distribuídos?
+
+```{r}
+coffee %>% group_by(State,Market_Size,Timezone) %>% summarise(Total=n()) %>%
+ ggplot(aes(x=State,y=Total)) +
+ geom_col(aes(fill=Timezone))+
+  scale_fill_brewer(palette='Dark2')+
+ facet_wrap(Market_Size~.,scales='free') +
+ coord_flip() +
+ ggtitle('Mercados por Estado')+
+ labs(y=NULL,x=NULL) +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))
+```
+
+Existem mercados de vários tamanhos no mesmo estado?
+```{r}
+coffee %>% group_by(State,Market_Size,Timezone) %>% summarise(Total=n()) %>%
+         mutate(porcentagem=(Total/sum(Total))*100) %>%
+ ggplot(aes(x=State,y=porcentagem)) +
+ geom_col(aes(fill=Market_Size))+
+ #facet_wrap(Market_Size~.,scales='free') +
+ coord_flip() +
+ ggtitle('Mercados por Estado')+
+ labs(y=NULL,x=NULL) +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))
+```
+
+Existem diferenças entre as Timezone?
+```{r}
+coffee %>% group_by(Market_Size,Timezone) %>% summarise(Total=n()) %>%
+         mutate(porcentagem=(Total/sum(Total))*100) %>%
+ ggplot(aes(x=Market_Size,y=porcentagem)) +
+ geom_col(aes(fill=Timezone))+
+ scale_fill_brewer(palette='Dark2')+
+ ggtitle('Proporção de Tamanhos de Mercados')+
+ labs(y=NULL,x=NULL) +
+ theme_classic() +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))
+```
+
+
+```{r}
+coffee %>% group_by(Timezone,Market_Size) %>% summarise(Total=n()) %>%
+         mutate(porcentagem=(Total/sum(Total))*100) %>%
+ ggplot(aes(x=Timezone,y=porcentagem)) +
+ geom_col(aes(fill=Market_Size))+
+ #scale_fill_brewer(palette='Dark2')+
+ ggtitle('Proporção de Tamanhos de Mercados por Timezone')+
+ labs(y=NULL,x=NULL) +
+   theme_classic() +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))
+```
+
+
+Há diferença de produtos por tamanho de mercado?
+```{r}
+coffee %>% group_by(Market_Size,Product,Timezone) %>% summarise(Total=n()) %>%
+ ggplot(aes(x=Product,y=Total)) +
+ geom_col(aes(fill=Timezone))+
+ facet_wrap(Market_Size~.,scales='free') +
+ ggtitle('Quantidade de Tipos de Produtos Por Mercado')+
+ labs(y=NULL,x=NULL) +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))+
+ coord_flip()
+```
+
+Os produtos estão distribuidos de que forma entre os mercados?
+```{r}
+coffee %>% group_by(Product,Market_Size) %>% summarise(Total=n()) %>%
+                 mutate(porcentagem=(Total/sum(Total))*100) %>%
+ ggplot(aes(x=Product,y=porcentagem)) +
+ geom_col(aes(fill=Market_Size))+
+ ggtitle('Proporção de Tipos de Produtos Por Mercado')+
+ labs(y=NULL,x=NULL) +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))+
+ coord_flip()
+
+```
+
+```{r}
+coffee %>% group_by(Market_Size,Product_Type,Timezone) %>% summarise(Total=n()) %>%
+ ggplot(aes(x=Product_Type,y=Total)) +
+ geom_col(aes(fill=Timezone),color='black')+
+  scale_fill_brewer(palette='Dark2')+
+ facet_grid(.~Market_Size,scales='free')  +
+ ggtitle('Produto por Mercado')+
+ labs(y=NULL,x=NULL) +
+ theme(plot.title = element_text(size = 16, hjust = 0.5))
+ 
+```
+
+```{r}
+coffee %>% group_by(Product_Type,Product) %>% summarise(Total=n()) %>%
+ ggplot(aes(x=Product,y=Total,fill=Product)) +
+  geom_col() +
+  facet_wrap(Product_Type~.,scales='free') +
+ coord_flip()+
+ ggtitle('Quantidade de Tipos')+
+ labs(y=NULL,x=NULL) +
+ theme(plot.title = element_text(size = 16, hjust = 0.5),
+       legend.position="none")
+ 
+```
+
+```{r}
+coffee %>%
+        group_by(Product,Product_Type,Timezone) %>%
+        summarise(Total=n()) %>%
+        mutate(porcentagem=(Total/sum(Total))*100) %>%
+        ggplot(aes(x=Product,y=porcentagem)) +
+        geom_col(aes(fill=Timezone),color='black')+
+   scale_fill_brewer(palette='Dark2')+
+        facet_wrap(Product_Type~.,scales='free') +
+        coord_flip() +
+        ggtitle('Proporção de Tipo Por Zona Horária')+
+        labs(y=NULL,x=NULL) +
+        theme(plot.title = element_text(size = 16, hjust = 0.5))
+```
+
+
+```{r}
+coffee %>%
+        group_by(Timezone,Product_Type,Product) %>%
+        summarise(Total=n()) %>%
+        mutate(porcentagem=(Total/sum(Total))*100) %>%
+        ggplot(aes(x=Product_Type,y=porcentagem)) +
+        geom_col(aes(fill=Product),color='black')+
+        facet_wrap(Timezone~.,scales='free') +
+        coord_flip() +
+        ggtitle('Tipos de Produtos por Zona')+
+        labs(y=NULL,x=NULL) +
+        theme(plot.title = element_text(size = 16, hjust = 0.5),
+              legend.title = element_blank())
+
+
+```
+
+
+# Tabelas
+
+Vamos analisar os lucros
+```{r}
+coffee %>%
+        group_by(Tipo=Type) %>%
+        summarise(`Inventario Total`=sum(Inventory),
+                  Gasto=sum(Cogs),
+                  Vendas=sum(Coffee_Sales),
+                  Lucro=sum(Profit),
+                  Margem=sum(Margin),
+                  Marketing=sum(Marketing)) %>%
+        gt() %>%
+  tab_header(
+    title = "Valores por Tipo de Bebida") %>%
+         fmt_currency(
+    columns = c(Gasto, Vendas, Lucro, Margem),
+    currency = "USD")
+        
+```
+```{r}
+coffee %>%
+        group_by(Produto=Product_Type) %>%
+        summarise(`Inventario Total`=sum(Inventory),
+                  Gasto=sum(Cogs),
+                  Vendas=sum(Coffee_Sales),
+                  Lucro=sum(Profit),
+                  Margem=sum(Margin),
+                  Marketing=sum(Marketing)) %>%
+        gt() %>%
+        tab_header(
+    title = "Valores por Produto") %>%
+         fmt_currency(
+    columns = c(Gasto, Vendas,  Lucro, Margem),
+    currency = "USD")
+```
+```{r}
+coffee %>%
+        group_by(`Tipo de Produto`=Product) %>%
+        summarise(`Inventario Total`=sum(Inventory),
+                  Gasto=sum(Cogs),
+                  Vendas=sum(Coffee_Sales),
+                  Lucro=sum(Profit),
+                  Margem=sum(Margin),
+                  Marketing=sum(Marketing)) %>%
+        gt() %>%
+  tab_header(
+    title = "Valores por Tipo de Produto") %>%
+         fmt_currency(
+    columns = c(Gasto, Vendas,  Lucro, Margem),
+    currency = "USD")
+```
+
+
+
+```{r}
+coffee %>%
+        group_by(Type,Produto=Product_Type) %>%
+        summarise(`Inventario Total`=sum(Inventory),
+                  Gasto=sum(Cogs),
+                  Vendas=sum(Coffee_Sales),
+                  Lucro=sum(Profit),
+                  Margem=sum(Margin),
+                  Marketing=sum(Marketing)) %>%
+        gt() %>%
+  tab_header(
+    title = "Valores por Tipo de Bebida e seus Produtos ") %>%
+         fmt_currency(
+    columns = c(Gasto, Vendas,  Lucro, Margem, Marketing),
+    currency = "USD") %>%
+  tab_row_group(
+    label = "Descafeinado",
+    rows = Type== 'Decaf'
+  ) %>%
+  tab_row_group(
+    label = "Normal",
+    rows = Type != 'Decaf'
+  )
+```
+
+```{r}
+coffee %>%
+        group_by(`Tipo de Mercado`=Market_Size,`Tipo do Produto`=Product_Type) %>%
+        summarise(Inventario=sum(Inventory),
+                  Gasto=sum(Cogs),
+                  Vendas=sum(Coffee_Sales),
+                  Lucro=sum(Profit),
+                  Margem=sum(Margin),
+                  Marketing=sum(Marketing)) %>%
+        gt() %>%
+  tab_header(
+    title = "Valores dos Produtos por Mercado") %>%
+         fmt_currency(
+    columns = c(Gasto, Vendas, Lucro, Margem),
+    currency = "USD")
+        
+```
+
+# Teste Estatístico
+
+Os testes estatísticos nos informa se existe alguma diferença significativa, entre grupos distintos, referente a algum parâmetro. No nosso caso, eu quero saber se há diferença entre o lucro tipo de bebidas e estados. 
+
+Um bom tutorial de como usar estes testes, seus pressupostos e como interpretá-los pode ser encontrado no canal da [Fernanda Peres](https://www.youtube.com/c/FernandaPeres).
+
+Os passos a seguir são uma adapatção dso vídeos da Fernanda sobre teste de hipóteses.
+
+## Há diferença entre o lucro por tipo de bebida?
+
+Há dois tipos de bebidas, as normais(Regular) e as descafeinadas(Decaf). Neste caso o teste estatístico é o t de Student ou o Teste de Mann-Whitney. O primeiro para variàveis que seguem uma distribuição normal e o segundo para as que não.
+
+Para testa se o teste t é viavel, devemos realizar o teste de shapiro para determinar se há normalidade  na distribuição dos dados.
+```{r}
+RVAideMemoire::byf.shapiro(Profit~Type,data=coffee)
+```
+O teste de Shapiro tem como hipótese nula que a distribuição é normal. Como o valor de p deu menor que 0.05, limiar padrão em testes de hipoteses, devemos desconsiderar a hipótese nula e aceitar a alternativa.
+
+A hipótese alternativa é a de não normalidade. Então devemos usar o teste de Teste de Mann-Whitney.
+
+```{r}
+wilcox.test(Profit~Type,data=coffee)
+```
+O teste de Mann-Whitney revela que não há diferença no lucro, quando se compara os tipos de bebidas, pois o p=0.39, nos impede de rejeitar a hipótese nula, que é a não há diferença entre os grupos.
+
+Vale ressaltar que o teste de Mann-Whitney compara a mediana entre os grupos, pois é uma medida de centralidade mais confiavel que a media em casos onde a distribuição não é normal. Entretanto, esta premissa só é verdadeira se a distribuição das duas categoricas forem iguais.
+
+
+```{r}
+hist(coffee$Profit[coffee$Type=='Decaf'], main='Distribuição da Bebida Descafeinada (Decaf)',xlab=NULL,ylab = NULL)
+hist(coffee$Profit[coffee$Type=='Regular'], main='Distribuição da Bebida Normal (Regular)',xlab=NULL,ylab = NULL)
+```
+
+Como a distribuição aparentemente é igual, podemos obter  pressumir que a difereça do valor p de fato se refere a mediana.
+
+Um resumo dos dados.
+```{r}
+coffee %>% group_by(Type) %>%
+        get_summary_stats(Profit, type = 'median_iqr') %>%
+  gt() %>%
+   cols_label(
+    Type= "Bebida",
+    variable = "",
+    median= "Mediana")
+```
+
+A mediana de fato não aparenta ser  diferente entre os grupos.
+
+```{r}
+boxplot(Profit~Type, data=coffee, xlab = NULL)
+```
+
+Há diferença de lucro dependendo do estado?
+
+Para comparar mais de duas variáveis devemos utilizar o teste de anova ou Kruskal-Wallis. O primeiro em caso de distribuição normal e a outra para as não normais.
+
+Assim como no teste t, deve ser testado a normalidade dos dados
+```{r}
+RVAideMemoire::byf.shapiro(Profit~State,data=coffee) 
+  
+```
+
+Em todos, os estados o p foi menor de 0,05, indicando uma distribuição não normal.
+
+Então será feito o teste de Kruskal-Wallis.
+
+
+```{r}
+kruskal.test(Profit~State,data=coffee)
+```
+O resultado foi um p < 0,05. Isto indica que há diferença de lucro entre os estados.
+
+A tabela abaixo compara a diferença na mediana entre os estados.
+
+```{r}
+dun=rstatix::dunn_test(Profit~State,data=coffee, p.adjust.method = 'bonferroni')
+datatable(as.data.frame(dun)[,-1], colnames = c('Estado 1'='group1', 'Estado 2'='group2'),rownames = F)
+          
+```
+
+O resumo dos dados
+```{r}
+coffee %>% group_by(State) %>%
+        get_summary_stats(Profit, type = 'median_iqr') %>%
+  datatable()
+```
+
+Visualização em boxplot
+```{r}
+new_order <- with(coffee, reorder(State,Profit, median , na.rm=T))
+
+boxplot(coffee$Profit~new_order, las=3,xlab='',ylab = '',cex.axis=0.6)
+```
+
+# Conclusão
+
+Apesar de não haver diferença de lucro entre bebidas com ou sem cafeina, alguns estados aparentam ter maior retorno do que outros, na mediana, um retorno maior que outros.
+
